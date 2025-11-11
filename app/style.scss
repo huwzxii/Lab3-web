@@ -1,0 +1,371 @@
+$main-color: #020405;
+
+/* ===== БАЗА ===== */
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e5e5e1;
+  color: $main-color;
+  text-align: left;
+}
+
+.frame {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  background: #deded9;
+  padding: 24px;
+  display: inline-block;
+  box-shadow: 0 40px 120px rgba(0,0,0,0.6);
+  border-radius: 6px;
+}
+
+.page {
+  width: 1000px;
+  height: 1400px;
+  background: #fff;
+  padding-top: 0;
+  box-sizing: border-box;
+  box-shadow: inset 0 0 12px rgba(0,0,0,0.06);
+}
+
+/* ===== СІТКА СТОРІНКИ ===== */
+.cv-grid { display:grid; grid-template-columns:1fr 360px; gap:24px; }
+
+/* ===== СЕКЦІЇ ЛІВО ===== */
+.section { margin-bottom:24px; }
+.section-title { margin:0 0 12px; }
+
+.job, .edu-item {
+  display:grid;
+  grid-template-columns:130px 1fr;
+  gap:25px;
+  margin:18px 0 22px;
+}
+.job-date, .edu-year { align-self:start; border:none; outline:none; box-shadow:none; }
+.job-title, .edu-degree { margin:0 0 6px; }
+.job-meta { display:flex; gap:16px; }
+.job-meta .location { margin-left:auto; }
+.job-desc, .edu-desc { margin:10px 0 0; }
+
+.section-title{
+  font-weight: bold;
+  margin: 25px 0 18px 0;
+  display: block;
+  position: relative;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(0,0,0,.6);
+}
+.section-title::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-1px;
+  width:60px;
+  height:4px;
+  background:#009999;
+}
+
+.cv-left > section { padding-left:30px; }
+
+.job{
+  display:grid;
+  grid-template-columns:130px 1fr;
+  column-gap:25px;
+}
+.job-date{
+  font-family:'Montserrat', sans-serif;
+  font-weight:600;
+  font-size:small;
+  background:#009999;
+  color:#fff;
+  width:130px;
+  text-align:center;
+  margin:0;
+  height:29px;
+  justify-self:start;
+}
+.location{ font-style:italic; font-weight:bold; color:#009999; }
+.company{ font-style:italic; font-weight:600; }
+.job-title{ white-space:nowrap; font-weight:bold; font-size:18px; }
+
+.references{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:5px;
+}
+.references .section-title { grid-column:1 / -1; }
+
+.edu-year{
+  background:#009999;
+  color:#fff;
+  font-family:'Montserrat', sans-serif;
+  font-weight:600;
+  font-size:small;
+  width:130px;
+  text-align:center;
+  margin:0;
+  height:29px;
+  justify-self:start;
+}
+.edu-degree{ white-space:nowrap; font-weight:bold; font-size:18px; }
+.edu-university{ font-style:italic; font-weight:600; }
+
+.name{ font-weight:bold; }
+.address{ font-style:italic; color:#009999; font-weight:bold; }
+.phone, .email{ font-family:'Montserrat', sans-serif; }
+
+.skills{
+  background:#e5e5e5;
+  margin-top:20px;
+  margin-left:5%;
+  padding:2px 25px 65px;
+}
+
+.skills-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px 50px;
+}
+
+.skill-label{
+  font-size:13px;
+  display:block;
+  margin-bottom:6px;
+  font-weight:600;
+}
+
+/* трек */
+.bar-track{
+  --val:60%;
+  position:relative;
+  width:100%;
+  height:4px;
+  background:#e0e0e0;
+  border-radius:2px;
+}
+
+/* заповнення */
+.bar-fill{
+  position:absolute;
+  left:0;
+  top:0;
+  height:100%;
+  width:var(--val);
+  background:#009999;
+  border-radius:2px;
+}
+
+/* квадратний повзунок */
+.bar-thumb{
+  position:absolute;
+  left:var(--val);
+  top:50%;
+  width:10px;
+  height:10px;
+  background:#009999;
+  transform:translate(-50%, -50%);
+  border-radius:2px;
+}
+
+
+/* ===== ПРАВА КОЛОНКА ===== */
+.profile-card{ padding:24px; margin-bottom:16px; }
+.avatar{ width:180px; height:180px; object-fit:cover; display:block; margin:0 auto 12px; border-radius:50%; }
+.namebar{ margin-bottom:8px; }
+.role{ margin:0 0 10px; }
+
+.profile-card{
+  background:#2e2e2e;
+  width:100%;
+  text-align:center;
+  color:#fff;
+  border-radius:0;
+  margin-top:-25px;
+  padding:37px 30px;
+}
+.avatar{
+  width:180px; height:180px; border-radius:50%; object-fit:cover;
+  border:8px solid #fff; margin-bottom:20px;
+}
+.namebar{ font-size:40px; margin-bottom:-20px; font-weight:800; }
+.first{ font-weight:900; }
+.last{ font-weight:300; letter-spacing:1px; }
+.role{
+  font-size:14px; letter-spacing:1px; display:block;
+  position:relative; margin:25px 0 18px 0; padding-bottom:5px;
+  border-bottom:4px solid rgba(255,254,254,0.6);
+}
+.role::after{
+  content:""; position:absolute; left:30%; bottom:-1px;
+  width:100px; height:2px; background:#009999;
+}
+
+.cv-right{
+  display:flex; flex-direction:column; gap:20px;
+  padding-top:0; padding-right:30px;
+}
+
+/* ===== CONTACTS (перегородка на всю висоту) ===== */
+.contact-box{ display:flex; flex-direction:column; gap:10px; }
+
+.contact-row{
+  --icon-col: 40px;
+  --pad-x: 14px;
+
+  position:relative;
+  display:grid;
+  grid-template-columns: var(--icon-col) 1fr;
+  align-items:center;
+  background:#e5e5e5;
+  padding:10px var(--pad-x);
+}
+
+/* вертикальна лінія від верху до низу */
+.contact-row::before{
+  content:"";
+  position:absolute;
+  left: calc(var(--pad-x) + var(--icon-col));
+  top: 0;
+  bottom: 0;
+  width: 1px;              
+  background: #296167;       
+}
+.contact-row i{
+  font-size:18px; color:#009999;
+  display:flex; align-items:center; justify-content:center;
+}
+.number{ font-size:small; font-weight:700; }
+.site{ font-style:italic; font-size:small; font-weight:450; }
+.home{ font-size:small; font-weight:700; }
+.contact-row span{ padding-left:14px; }
+
+/* ===== ABOUT ME ===== */
+.about-me p, .about-me blockquote{ margin:0 0 12px; }
+
+/* ===== LANGUAGES (під твій HTML з .circle) ===== */
+.languages{
+  display:flex;
+  gap:30px;
+  justify-content:center;     
+  margin-top:25px;
+}
+.lang{ text-align:center; }
+
+.circle{
+  --size:95px;
+  --color:#e5e5e5; 
+  --bg:#ffffff;    
+  --val:0;          
+
+  width:var(--size);
+  height:var(--size);
+  border-radius:50%;
+  border:8px solid #009999;
+  background: conic-gradient(var(--color) calc(var(--val) * 1%), var(--bg) 0);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  margin:0 auto 10px;
+}
+.circle .percent{ font-size:20px; font-weight:700; margin:0; line-height:1.1; }
+.circle .label{ font-size:11px; font-weight:700; margin-top:4px; letter-spacing:.3px; }
+
+/* ===== HOBBIES ===== */
+.hobbies{ margin-top:-43px; }
+.hobbies-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:5px; margin-top:2px;
+}
+.hobby-box{
+  border:4px solid #333;
+  padding:5px;
+  text-align:center;
+  font-family:'Montserrat', sans-serif;
+}
+.hobby-box i{ color:#009999; font-size:35px; }
+.hobby{ font-style:italic; font-weight:700; }
+
+/* ===== КНОПКИ: прибрати чорні рамки у всіх випадках ===== */
+button{
+  border:none; outline:none; box-shadow:none;
+  background:transparent; appearance:none; -webkit-appearance:none;
+}
+.job-date, .edu-year{
+  background:#009999; color:#fff; border:none; outline:none; box-shadow:none;
+  width:130px; height:29px; text-align:center;
+  font-family:'Montserrat', sans-serif; font-weight:600; font-size:small;
+}
+.job-date:focus, .edu-year:focus, .job-date:focus-visible, .edu-year:focus-visible{
+  outline:none; box-shadow:none;
+}
+
+.languages {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* було 40px */
+  margin-top: 25px;
+}
+
+
+.lang {
+  text-align: center;
+}
+
+/* Контейнер кола */
+.ring {
+  --p: 80; /* % рівень (перезаписується inline) */
+
+  position: relative;
+  width: 105px;
+  height: 105px;
+}
+
+/* Центр */
+.ring-center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.ring-center .percent {
+  font-size: 20px;
+  font-weight: 800;
+}
+.ring-center .label {
+  font-size: 12px;
+  font-weight: 700;
+  margin-top: 4px;
+  letter-spacing: .4px;
+}
+
+/* SVG */
+.ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+/* Сіра основа */
+.track {
+  fill: none;
+  stroke: #dcdcdc;
+  stroke-width: 8;
+}
+
+/* Бірюзова дуга */
+.progress {
+  fill: none;
+  stroke: #009999;
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 314; /* ~ коло */
+  stroke-dashoffset: calc(314 - (314 * var(--p) / 100));
+  transition: stroke-dashoffset 0.6s ease;
+}
