@@ -1,0 +1,22 @@
+// _layout.scss
+
+/* СІТКА СТОРІНКИ */
+.cv-grid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 24px;
+}
+
+/* ЛІВА КОЛОНКА */
+.cv-left > section {
+  padding-left: 30px;
+}
+
+/* ПРАВА КОЛОНКА */
+.cv-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 0;
+  padding-right: 30px;
+}

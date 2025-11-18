@@ -1,0 +1,44 @@
+
+
+// КОЛЬОРИ
+$main-color: #020405;
+$accent-color: #009999;
+$page-bg: #e5e5e1;
+$skills-bg: #e5e5e5;
+$card-dark: #2e2e2e;
+
+// ШРИФТИ ТА ПРОМІЖКИ
+$font-main: 'Montserrat', sans-serif;
+$spacing-lg: 24px;
+$spacing-md: 18px;
+$spacing-sm: 8px;
+
+// РОЗМІРИ СТОРІНКИ (математична операція)
+$page-width: 1000px;
+$page-ratio: 1.4;       // висота = ширина * 1.4
+$frame-shadow: 0 40px 120px rgba(0, 0, 0, 0.6);
+
+// МІКСІН ДЛЯ ЦЕНТРУВАННЯ
+@mixin flex-center-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+// ПЛЕЙСХОЛДЕР ДЛЯ КНОПОК-ДАТ (@extend)
+%pill-badge {
+  font-family: $font-main;
+  font-weight: 600;
+  font-size: small;
+  background: $accent-color;
+  color: #fff;
+  width: 130px;
+  height: 29px;
+  text-align: center;
+  margin: 0;
+  justify-self: start;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}

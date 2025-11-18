@@ -1,0 +1,130 @@
+// _left-column.scss
+
+/* JOB & EDUCATION */
+.job,
+.edu-item {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 25px;
+  margin: 18px 0 22px;
+}
+
+/* Використання @extend з плейсхолдера */
+.job-date,
+.edu-year {
+  @extend %pill-badge;
+}
+
+.location {
+  font-style: italic;
+  font-weight: bold;
+  color: $accent-color;
+}
+
+.company {
+  font-style: italic;
+  font-weight: 600;
+}
+
+.job-title,
+.edu-degree {
+  white-space: nowrap;
+  font-weight: bold;
+  font-size: 18px;
+  margin: 0 0 6px;
+}
+
+.job-meta {
+  display: flex;
+  gap: 16px;
+
+  .location {
+    margin-left: auto;
+  }
+}
+
+.job-desc,
+.edu-desc {
+  margin: 10px 0 0;
+}
+
+.edu-university {
+  font-style: italic;
+  font-weight: 600;
+}
+
+/* REFERENCES */
+.references {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+
+  .section-title {
+    grid-column: 1 / -1;
+  }
+}
+
+.name {
+  font-weight: bold;
+}
+.address {
+  font-style: italic;
+  color: $accent-color;
+  font-weight: bold;
+}
+.phone,
+.email {
+  font-family: $font-main;
+}
+
+/* SKILLS */
+.skills {
+  background: $skills-bg;
+  margin-top: 20px;
+  margin-left: 5%;
+  padding: 2px 25px 65px;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px 50px;
+}
+
+.skill-label {
+  font-size: 13px;
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+/* Прогрес-бар: використовуємо вкладеність селекторів */
+.bar-track {
+  --val: 60%;
+  position: relative;
+  width: 100%;
+  height: 4px;
+  background: #e0e0e0;
+  border-radius: 2px;
+
+  .bar-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: var(--val);
+    background: $accent-color;
+    border-radius: 2px;
+  }
+
+  .bar-thumb {
+    position: absolute;
+    left: var(--val);
+    top: 50%;
+    width: 10px;
+    height: 10px;
+    background: $accent-color;
+    transform: translate(-50%, -50%);
+    border-radius: 2px;
+  }
+}

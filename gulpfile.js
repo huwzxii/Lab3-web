@@ -1,51 +1,74 @@
-const { src, dest, series, parallel, watch } = require('gulp');
-const sass = require('gulp-sass')(require('sass'));
-const cssnano = require('gulp-cssnano');
-const rename = require('gulp-rename');
-const concat = require('gulp-concat');
-const uglify = require('gulp-uglify');
-const imagemin = require('gulp-imagemin');
-const browserSync = require('browser-sync').create();
+const { src, dest, series, parallel, watch } = require("gulp");
+const sass = require("gulp-dart-sass");
+const cleanCSS = require("gulp-clean-css");
+const uglify = require("gulp-uglify");
+const sourcemaps = require("gulp-sourcemaps");
+const del = require("del");
+const rename = require("gulp-rename");
+const browserSync = require("browser-sync").create();
 
-// Шляхи
 const paths = {
-  html: { src: 'app/*.html', dest: 'dist/' },
-  scss: { src: 'app/*.scss', dest: 'dist/css/' },
-  js: { src: 'app/*.js', dest: 'dist/js/' },
-  img: { src: 'app/img/*', dest: 'dist/img/' }
+  html: "app/*.html",
+  styles: "app/scss/main.scss",  // головний SCSS
+  scripts: "app/script.js",      // якщо нема script.js — можеш потім прибрати
+  images: "app/img/**/*.*",
+  dist: "dist",
 };
 
-// HTML
-const htmlTask = () => src(paths.html.src).pipe(dest(paths.html.dest)).pipe(browserSync.stream());
-  
-// SCSS
-const scssTask = () =>
-  src(paths.scss.src)
-    .pipe(sass())
-    .pipe(cssnano())
-    .pipe(rename({ suffix: '.min' }))
-    .pipe(dest(paths.scss.dest))
-    .pipe(browserSync.stream());
+// 1) Очистка dist
+function clean() {
+  return del.deleteAsync([paths.dist]);
+}
 
-// JS
-const jsTask = () =>
-  src(paths.js.src)
-    .pipe(concat('main.min.js'))
+// 2) Копіюємо HTML у dist
+function html() {
+  return src(paths.html).pipe(dest(paths.dist));
+}
+
+// 3) SCSS -> dist/css/index.min.css
+function styles() {
+  return src(paths.styles)
+    .pipe(sourcemaps.init())
+    .pipe(sass().on("error", sass.logError))
+    .pipe(cleanCSS())
+    .pipe(rename("index.min.css"))
+    .pipe(sourcemaps.write("."))
+    .pipe(dest(paths.dist + "/css"))
+    .pipe(browserSync.stream());
+}
+
+// 4) JS
+function scripts() {
+  return src(paths.scripts)
     .pipe(uglify())
-    .pipe(dest(paths.js.dest))
-    .pipe(browserSync.stream());
+    .pipe(dest(paths.dist + "/js"));
+}
 
-// Images
-const imgTask = () => src(paths.img.src).pipe(imagemin()).pipe(dest(paths.img.dest));
+// 5) Картинки
+function images() {
+  return src(paths.images).pipe(dest(paths.dist + "/img"));
+}
 
-// BrowserSync
-const serve = () => {
-  browserSync.init({ server: { baseDir: 'dist/' } });
-  watch(paths.html.src, htmlTask);
-  watch(paths.scss.src, scssTask);
-  watch(paths.js.src, jsTask);
-  watch(paths.img.src, imgTask);
-};
+// 6) Dev-сервер + вотчери
+function serve() {
+  browserSync.init({
+    server: {
+      baseDir: paths.dist,
+    },
+    open: false, // можеш змінити на true, якщо хочеш авто-відкриття браузера
+  });
 
-exports.build = series(parallel(htmlTask, scssTask, jsTask, imgTask));
-exports.default = series(exports.build, serve);
+  watch("app/scss/**/*.scss", styles);
+  watch(paths.html, series(html)).on("change", browserSync.reload);
+  watch(paths.scripts, series(scripts)).on("change", browserSync.reload);
+}
+
+// 7) Build
+const build = series(clean, parallel(html, styles, scripts, images));
+
+exports.clean = clean;
+exports.build = build;
+exports.serve = series(build, serve);
+
+// Коли просто пишеш "gulp" або "npm run dev" → build + serve
+exports.default = exports.serve;
